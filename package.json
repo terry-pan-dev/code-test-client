@@ -6,6 +6,7 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "firebase": "^8.4.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
@@ -16,7 +17,7 @@
     "build": "react-scripts",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "react-scripts build && aws s3 rm s3://code-test-client --recursive && aws s3 cp ./build s3://code-test-client --recursive --acl public-read"
+    "deploy": "NODE_ENV=production react-scripts build && aws s3 rm s3://code-test-client --recursive && aws s3 cp ./build s3://code-test-client --recursive --acl public-read"
   },
   "eslintConfig": {
     "extends": [
