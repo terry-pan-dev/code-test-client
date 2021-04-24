@@ -1,12 +1,16 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
-import { GlobalStyle } from './style.js';
-import App from './App';
+import theme from './theme.js';
+import App from './app';
+import { ThemeProvider } from '@material-ui/core'
+import CssBaseline from '@material-ui/core/CssBaseline'
 
 ReactDOM.render(
-  <Fragment>
-    <GlobalStyle />
-    <App />
-  </Fragment>,
+  <React.StrictMode>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <App />
+    </ThemeProvider>
+  </React.StrictMode>,
   document.getElementById('root')
 );
