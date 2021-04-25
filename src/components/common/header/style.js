@@ -61,4 +61,9 @@ export default makeStyles((theme) => ({
             display: 'none',
         },
     },
+    logo: {
+        textDecoration: 'none',
+        color: 'inherit',
+        weight: 'bold'
+    }
 }));

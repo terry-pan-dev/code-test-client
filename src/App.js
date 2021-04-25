@@ -7,8 +7,11 @@ import { AuthProvider } from './components/contexts/authContext'
 import {
   Home,
   SignUp,
-  Login
+  Login,
+  Map,
+  PasswordReset
 } from './components/pages'
+import PrivateRoute from './components/common/route/privateRoute'
 
 
 function App() {
@@ -20,6 +23,8 @@ function App() {
           <Route path='/' exact component={Home} />
           <Route path='/signup' component={SignUp} />
           <Route path='/login' component={Login} />
+          <Route path='/password-reset' component={PasswordReset} />
+          <PrivateRoute path='/map' component={Map} />
         </BrowserRouter>
       </AuthProvider>
     </Provider>

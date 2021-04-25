@@ -1,6 +1,5 @@
 import React, { useRef, useState } from 'react';
 import {
-    Avatar,
     Button,
     TextField,
     Grid,
@@ -10,31 +9,27 @@ import {
 import {
     Alert
 } from '@material-ui/lab'
-import VpnKey from '@material-ui/icons/VpnKey'
 import { useAuth } from '../../contexts/authContext'
-import { Link, useHistory } from 'react-router-dom'
 import useStyles from './style'
 
 export default function Login() {
     const classes = useStyles()
     const emailRef = useRef();
-    const passwordRef = useRef();
-    const { login } = useAuth();
+    const { passwordReset } = useAuth();
     const [error, setError] = useState('')
+    const [success, setSuccess] = useState('')
     const [loading, setLoading] = useState(false)
-    let history = useHistory()
 
     async function handleSubmit(e) {
         e.preventDefault();
         const email = emailRef.current.value;
-        const password = passwordRef.current.value;
         try {
             setError('')
             setLoading(true)
-            await login(email, password)
-            history.push('/map')
+            await passwordReset(email)
+            setSuccess("a password reset link sent to you mail")
         } catch {
-            setError('cannot login by provided credentials')
+            setError('cannot reset provided password')
         }
         setLoading(false)
     }
@@ -47,16 +42,20 @@ export default function Login() {
                 </Grid>
             )
         }
+        if (success) {
+            return (
+                <Grid item xs={12}>
+                    <Alert severity="success">{success}</Alert>
+                </Grid>
+            )
+        }
         return null;
     }
     return (
         <Container component="main" maxWidth="xs">
             <div className={classes.paper}>
-                <Avatar className={classes.avatar}>
-                    <VpnKey />
-                </Avatar>
                 <Typography component="h1" variant="h5">
-                    Login
+                    Reset Password
                 </Typography>
                 <form className={classes.form} noValidate onSubmit={handleSubmit}>
                     <Grid container spacing={2}>
@@ -73,19 +72,6 @@ export default function Login() {
                                 inputRef={emailRef}
                             />
                         </Grid>
-                        <Grid item xs={12}>
-                            <TextField
-                                variant="outlined"
-                                required
-                                fullWidth
-                                name="password"
-                                label="Password"
-                                type="password"
-                                id="password"
-                                autoComplete="current-password"
-                                inputRef={passwordRef}
-                            />
-                        </Grid>
                     </Grid>
                     <Button
                         disabled={loading}
@@ -95,18 +81,8 @@ export default function Login() {
                         color="primary"
                         className={classes.submit}
                     >
-                        Login
+                        Reset Password
                     </Button>
-                    <Grid container justify="center">
-                        <Link to='/password-reset'>
-                            Forgot Password?
-                        </Link>
-                    </Grid>
-                    <Grid container justify="center">
-                        <Link to='/signup'>
-                            Do not have an account? Sign up
-                        </Link>
-                    </Grid>
                 </form>
             </div>
         </Container>
