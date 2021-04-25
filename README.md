@@ -11,6 +11,8 @@ launch locally
 npm start
 ```
 
+Then all you have to do, it's sign up and login.
+
 ### Tech Stack Selection
 #### material-ui
 I choose material-ui as the front end UI library for several reasons. First of
